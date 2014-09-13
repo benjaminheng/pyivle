@@ -10,18 +10,6 @@ pyivle, pronounced "*py-vee-el-ee*", is a Python package that provides access to
 
 pyivle is currently under heavy development. The development timeline is as follows:
 
-### Priority #1
-
-* login
-* modules
-* announcements
-* workbin
-
-### Priority #2
-
-* webcasts
-* gradebook
-
-### Priority #3
-
-* forum
+**High priority**: login, modules, announcements, workbin
+**Medium priority**: webcasts, gradebook
+**Low priority**: forum
