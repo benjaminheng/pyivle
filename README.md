@@ -13,6 +13,6 @@ pyivle is currently under heavy development. The development timeline is as foll
 * **High priority**
     * login, modules, announcements, workbin
 * **Medium priority**
-    *webcasts, gradebook
+    * webcasts, gradebook
 * **Low priority**
     * forum
