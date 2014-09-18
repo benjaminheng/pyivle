@@ -5,3 +5,7 @@ pyivle, pronounced "*py-vee-el-ee*", is a Python package that provides access to
 ## Installation
 
 ## Usage
+
+## Development Status
+
+pyivle is currently not ready for production.
