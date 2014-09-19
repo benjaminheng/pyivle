@@ -7,8 +7,9 @@ from cookielib import CookieJar
 def call(method, params):
     baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
     url = '%s?%s' % (baseUrl + method, urllib.urlencode(params))
-    result = urllib2.urlopen(url).read()
-    return result
+    jsonString = urllib2.urlopen(url).read()
+    results = json.loads(jsonString)['Results'] # TODO: is this the standard locaton for results?
+    return [i for i in results]
 
 def get_auth_token(apiKey, userid, password):
     loginUrl = 'https://ivle.nus.edu.sg/api/login/?apikey=%s' % apiKey
