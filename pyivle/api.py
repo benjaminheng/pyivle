@@ -7,14 +7,15 @@ from cookielib import CookieJar
 def call(method, params):
     baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
     url = '%s?%s' % (baseUrl + method, urllib.urlencode(params))
-    return url
+    result = urllib2.urlopen(url).read()
+    return result
 
 def get_auth_token(apiKey, userid, password):
     loginUrl = 'https://ivle.nus.edu.sg/api/login/?apikey=%s' % apiKey
     data = urllib2.urlopen(loginUrl).read()
 
     if len(data) == 0:
-        print 'HEY!'
+        print 'API_KEY not valid!'
         # TODO: raise exception: apiKey not valid
 
     viewstate = re.search('__VIEWSTATE.+?value="(.+?)"', data);
@@ -28,6 +29,10 @@ def get_auth_token(apiKey, userid, password):
     cj = CookieJar()
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
     userToken = opener.open(loginUrl, params).read()
+
+    if len(userToken) != 416:
+        # TODO: raise exception, invalid login parameters
+        print 'login fail, unable to get usertoken'
 
     return userToken
 

@@ -1,11 +1,10 @@
 import json
 import api
-import login
 
 class Pyivle(object):
-    def __init__(self, apiKey, **kwargs):
+    def __init__(self, apiKey, authToken=None, **kwargs):
         self.apiKey = apiKey
-        self.authToken = None
+        self.authToken = authToken
         #self.authToken = self._login(userid, password)
 
     # TODO: authenticate and get authtoken
@@ -15,8 +14,8 @@ class Pyivle(object):
     # Adds authentication parameters to parameter list
     # TODO: raise exception if authtoken not set
     def add_auth(self, params):
-        params['apikey'] = self.apiKey
-        params['authtoken'] = self.authToken
+        params['APIKey'] = self.apiKey
+        params['AuthToken'] = self.authToken
         return params
 
     # Converts params to lowercase strings. Add auth params if specified.
@@ -34,7 +33,7 @@ class Pyivle(object):
 
     # Login.validate
     def validate(self):
-        params = {'APIKey': apiKey, 'Token': authToken}
+        params = {'APIKey': self.apiKey, 'Token': self.authToken}
         return api.call('Validate', params)
 
     # Module.modules
