@@ -3,13 +3,18 @@ import urllib
 import json
 import re
 from cookielib import CookieJar
+from collections import namedtuple
 
 def call(method, params):
     baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
     url = '%s?%s' % (baseUrl + method, urllib.urlencode(params))
     jsonString = urllib2.urlopen(url).read()
-    results = json.loads(jsonString)['Results'] # TODO: is this the standard locaton for results?
-    return [i for i in results]
+    # DEBUG TODO: remove
+    with open('jsondump.txt', 'w') as f:
+        f.write(jsonString)
+    # Magic (http://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object)
+    result = json.loads(jsonString, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    return result
 
 def get_auth_token(apiKey, userid, password):
     loginUrl = 'https://ivle.nus.edu.sg/api/login/?apikey=%s' % apiKey

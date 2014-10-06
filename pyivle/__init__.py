@@ -42,3 +42,10 @@ class Pyivle(object):
         params = self.process_params(params, auth)
         return api.call('Modules', params)
 
+    # Module.module
+    def module(self, courseId, auth=True, duration=0, includeAllInfo=True, titleOnly=False):
+        params = {'Duration': duration, 'IncludeAllInfo': includeAllInfo, 'CourseID': courseId,
+                  'TitleOnly': titleOnly}
+        params = self.process_params(params, auth)
+        return api.call('Module', params)
+
