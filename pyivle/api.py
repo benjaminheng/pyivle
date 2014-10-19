@@ -5,7 +5,12 @@ import re
 from cookielib import CookieJar
 from collections import namedtuple
 
-def call(method, params):
+apiKey = None
+authToken = None
+
+# call the method specified. don't add auth params by default
+def call(method, params, auth=False):
+    params = process_params(params, auth=auth)
     baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
     url = '%s?%s' % (baseUrl + method, urllib.urlencode(params))
     jsonString = urllib2.urlopen(url).read()
@@ -42,3 +47,17 @@ def get_auth_token(apiKey, userid, password):
 
     return userToken
 
+# Adds authentication parameters to parameter list
+# TODO: raise exception if authtoken not set
+def add_auth( params):
+    params['APIKey'] = apiKey
+    params['AuthToken'] = authToken
+    return params
+
+# Converts params to strings. Add auth params if specified.
+def process_params( params, auth=False):
+    for i in params:
+        params[i] = str(params[i])
+    if auth: 
+        params = add_auth(params)
+    return params
