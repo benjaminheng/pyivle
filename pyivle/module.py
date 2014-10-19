@@ -6,12 +6,12 @@ def modules(auth=True, duration=0, includeAllInfo=True):
     return api.call('Modules', params, auth=auth)
 
 # Module.Modules_Staff
-def modules_staff(auth=True, duration=0, includeallinfo=True):
+def modules_staff(auth=True, duration=0, includeAllInfo=True):
     params = {'Duration': duration, 'IncludeAllInfo': includeAllInfo}
     return api.call('Modules_Staff', params, auth=auth)
 
 # Module.Modules_Student
-def modules_student(auth=True, duration=0, includeallinfo=True):
+def modules_student(auth=True, duration=0, includeAllInfo=True):
     params = {'Duration': duration, 'IncludeAllInfo': includeAllInfo}
     return api.call('Modules_Student', params, auth=auth)
 
@@ -21,7 +21,7 @@ def module(courseId, auth=True, duration=0, includeAllInfo=True, titleOnly=False
     return api.call('Module', params, auth=auth)
 
 # Module.Modules_Search
-def modules_search(auth=True, duration=0, includeallinfo=True):
+def modules_search(auth=True, duration=0, includeAllInfo=True):
     params = {'Duration': duration, 'IncludeAllInfo': includeAllInfo}
     return api.call('Modules_Search', params, auth=auth)
 
