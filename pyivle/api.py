@@ -50,7 +50,6 @@ def get_auth_token(apiKey, userid, password):
     return userToken
 
 # Adds authentication parameters to parameter list
-# TODO: raise exception if authtoken not set
 def add_auth(params):
     if not authToken:
         raise UnauthenticatedException('Not authenticated. Login or specify auth=False (if available) if you are sure you wish to call this function without authentication.')
