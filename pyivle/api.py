@@ -8,6 +8,10 @@ from collections import namedtuple
 apiKey = None
 authToken = None
 
+class InvalidAPIKeyException(Exception): pass
+class InvalidLoginException(Exception): pass
+class UnauthenticatedException(Exception): pass
+
 # call the method specified. don't add auth params by default
 def call(method, params, auth=False):
     params = process_params(params, auth=auth)
@@ -26,13 +30,12 @@ def get_auth_token(apiKey, userid, password):
     data = urllib2.urlopen(loginUrl).read()
 
     if len(data) == 0:
-        print 'API_KEY not valid!'
-        # TODO: raise exception: apiKey not valid
+        raise InvalidAPIKeyException('API key is not valid.')
 
-    viewstate = re.search('__VIEWSTATE.+?value="(.+?)"', data);
+    viewstate = re.search('__VIEWSTATE.+?value="(.+?)"', data)
     if not viewstate:
         print '[Error] Unable to get user token.'
-        # TODO: Raise exception
+        # TODO: try a hardcoded VIEWSTATE value. if fail again, raise exception
 
     viewstate = viewstate.group(1)
     params = urllib.urlencode({'__VIEWSTATE': viewstate, 'userid': userid, 'password': password})
@@ -42,20 +45,21 @@ def get_auth_token(apiKey, userid, password):
     userToken = opener.open(loginUrl, params).read()
 
     if len(userToken) != 416:
-        # TODO: raise exception, invalid login parameters
-        print 'login fail, unable to get usertoken'
+        raise InvalidLoginException('Login credentials are not valid.')
 
     return userToken
 
 # Adds authentication parameters to parameter list
 # TODO: raise exception if authtoken not set
-def add_auth( params):
+def add_auth(params):
+    if not authToken:
+        raise UnauthenticatedException('Not authenticated. Login or specify auth=False (if available) if you are sure you wish to call this function without authentication.')
     params['APIKey'] = apiKey
     params['AuthToken'] = authToken
     return params
 
 # Converts params to strings. Add auth params if specified.
-def process_params( params, auth=False):
+def process_params(params, auth=False):
     for i in params:
         params[i] = str(params[i])
     if auth: 
