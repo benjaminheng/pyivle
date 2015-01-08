@@ -7,6 +7,7 @@ from collections import namedtuple
 
 apiKey = None
 authToken = None
+baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
 
 class InvalidAPIKeyException(Exception): pass
 class InvalidLoginException(Exception): pass
@@ -15,15 +16,31 @@ class UnauthenticatedException(Exception): pass
 # call the method specified. don't add auth params by default
 def call(method, params, auth=False):
     params = process_params(params, auth=auth)
-    baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
     url = '%s?%s' % (baseUrl + method, urllib.urlencode(params))
     jsonString = urllib2.urlopen(url).read()
     # DEBUG TODO: remove
     with open('jsondump.txt', 'w') as f:
-        f.write(jsonString)
+        parsed = json.loads(jsonString)
+        f.write(json.dumps(parsed, indent=4, sort_keys=True))
     # Magic (http://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object)
     result = json.loads(jsonString, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
     return result
+
+# call the method specified via POST
+#TODO: test this method
+def call_post(method, params, auth=False):
+    params = process_params(params, auth=auth)
+    paramsEncoded = urllib.urlencode(params)
+    url = baseUrl + method
+    jsonString = urllib2.Request(url, paramsEncoded).read()
+    # DEBUG TODO: remove
+    with open('jsondump_post.txt', 'w') as f:
+        parsed = json.loads(jsonString)
+        f.write(json.dumps(parsed, indent=4, sort_keys=True))
+    # Magic (http://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object)
+    result = json.loads(jsonString, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+    return result
+    
 
 def get_auth_token(apiKey, userid, password):
     loginUrl = 'https://ivle.nus.edu.sg/api/login/?apikey=%s' % apiKey

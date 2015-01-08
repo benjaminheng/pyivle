@@ -41,17 +41,17 @@ def module_weblinks(courseId, auth=True):
     return api.call('Module_Weblinks', params, auth=auth)
 
 # Module.Module_ReadingFormatted
-def module_readingformatted(courseId, auth=True, duration=0):
+def module_reading_formatted(courseId, auth=True, duration=0):
     params = {'Duration': duration, 'CourseID': courseId}
     return api.call('Module_ReadingFormatted', params, auth=auth)
 
 # Module.Module_ReadingUnformatted
-def module_readingunformatted(courseId, auth=True, duration=0):
+def module_reading_unformatted(courseId, auth=True, duration=0):
     params = {'Duration': duration, 'CourseID': courseId}
     return api.call('Module_ReadingUnformatted', params, auth=auth)
 
 # Module.Module_ReadingsFormatted_Coop
-def module_readingsformatted_coop(date, auth=True):
+def module_readings_formatted_coop(date, auth=True):
     params = {'date': date}
     return api.call('Module_ReadingsFormatted_Coop', params, auth=auth)
 
