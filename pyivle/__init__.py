@@ -3,6 +3,8 @@ import login
 import module
 import consultation
 import rosters_and_groups as roster
+import announcement
+import webcast_lectures 
 
 class Pyivle(object):
     def __init__(self, apiKey, authToken=None, **kwargs):
@@ -54,6 +56,16 @@ class Pyivle(object):
         self.project_enrolled_groups = roster.project_enrolled_groups
         self.project_group_sign_up = roster.project_group_sign_up
         self.project_group_remove_sign_up = roster.project_group_remove_sign_up
+
+        # Announcement
+        self.announcements = announcement.announcements
+        self.announcements_unread = announcement.announcements_unread
+        self.announcements_add_log = announcement.announcements_add_log
+        self.announcements_add = announcement.announcements_add
+
+        # Webcast Lectures
+        self.webcasts = webcast_lectures.webcasts
+        self.webcasts_add_log = webcast_lectures.webcasts
         
     def login(self, userid, password):
         api.authToken = api.get_auth_token(api.apiKey, userid, password)
