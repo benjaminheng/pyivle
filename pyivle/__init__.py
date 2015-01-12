@@ -6,8 +6,9 @@ from announcement import Announcement
 from webcast_lectures import WebcastLectures
 from rosters_and_groups import RostersAndGroups
 from timetable import Timetable
+from forum import Forum
 
-class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, WebcastLectures, Timetable):
+class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Timetable):
     def __init__(self, apiKey, authToken=None, **kwargs):
         api.apiKey = apiKey
         if authToken: api.authToken = authToken
