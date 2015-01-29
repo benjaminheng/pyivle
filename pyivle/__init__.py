@@ -7,12 +7,13 @@ from webcast_lectures import WebcastLectures
 from rosters_and_groups import RostersAndGroups
 from timetable import Timetable
 from forum import Forum
+from poll import Poll
+from workbin import Workbin
 
-class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Timetable):
+class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Timetable):
     def __init__(self, apiKey, authToken=None, **kwargs):
         api.apiKey = apiKey
         if authToken: api.authToken = authToken
-        #self.authToken = self._login(userid, password)
 
     def login(self, userid, password):
         api.authToken = api.get_auth_token(api.apiKey, userid, password)
