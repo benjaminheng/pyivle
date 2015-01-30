@@ -9,8 +9,11 @@ from timetable import Timetable
 from forum import Forum
 from poll import Poll
 from workbin import Workbin
+from gradebook import Gradebook
+from library_ereserves import LibraryEReserves 
+from open_webcast_lectures import OpenWebcastLectures 
 
-class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Timetable):
+class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, OpenWebcastLectures, Timetable):
     def __init__(self, apiKey, authToken=None, **kwargs):
         api.apiKey = apiKey
         if authToken: api.authToken = authToken
