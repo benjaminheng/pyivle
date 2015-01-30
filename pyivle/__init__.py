@@ -12,8 +12,9 @@ from workbin import Workbin
 from gradebook import Gradebook
 from library_ereserves import LibraryEReserves 
 from open_webcast_lectures import OpenWebcastLectures 
+from profile import Profile
 
-class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, OpenWebcastLectures, Timetable):
+class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, OpenWebcastLectures, Profile, Timetable):
     def __init__(self, apiKey, authToken=None, **kwargs):
         api.apiKey = apiKey
         if authToken: api.authToken = authToken
