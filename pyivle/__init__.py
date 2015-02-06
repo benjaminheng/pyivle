@@ -13,16 +13,17 @@ from gradebook import Gradebook
 from library_ereserves import LibraryEReserves 
 from open_webcast_lectures import OpenWebcastLectures 
 from profile import Profile
+from my_organizer import MyOrganizer
 
-class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, OpenWebcastLectures, Profile, Timetable):
+class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, MyOrganizer, OpenWebcastLectures, Profile, Timetable):
     def __init__(self, apiKey, authToken=None, **kwargs):
         api.apiKey = apiKey
-        if authToken: api.authToken = authToken
+        if authToken: 
+            api.authToken = authToken
 
     def login(self, userid, password):
         api.authToken = api.get_auth_token(api.apiKey, userid, password)
     
     # Allow user to call custom methods in case of changes to the LAPI
     def call(self, method, auth=True, verb='get', **kwargs):
-        params = self.process_params(kwargs, auth)
-        return api.call(method, params, auth, verb)
+        return api.call(method, kwargs, auth, verb)
