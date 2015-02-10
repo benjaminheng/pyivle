@@ -12,9 +12,10 @@ from workbin import Workbin
 from gradebook import Gradebook
 from library_ereserves import LibraryEReserves 
 from open_webcast_lectures import OpenWebcastLectures 
+from student_events import StudentEvents
+from ivle_news import IVLENews 
 from profile import Profile
 from my_organizer import MyOrganizer
-from student_events import StudentEvents
 
 class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, MyOrganizer, OpenWebcastLectures, StudentEvents, Profile, Timetable):
     def __init__(self, apiKey, authToken=None, **kwargs):
