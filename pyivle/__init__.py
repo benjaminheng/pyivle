@@ -11,13 +11,15 @@ from poll import Poll
 from workbin import Workbin
 from gradebook import Gradebook
 from library_ereserves import LibraryEReserves 
+from my_organizer import MyOrganizer
+from community import Community
 from open_webcast_lectures import OpenWebcastLectures 
 from student_events import StudentEvents
 from ivle_news import IVLENews 
+from delta_datasets import DeltaDatasets
 from profile import Profile
-from my_organizer import MyOrganizer
 
-class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, MyOrganizer, OpenWebcastLectures, StudentEvents, Profile, Timetable):
+class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Gradebook, LibraryEReserves, MyOrganizer, Community, OpenWebcastLectures, StudentEvents, IVLENews, DeltaDatasets, Profile, Timetable):
     def __init__(self, apiKey, authToken=None, **kwargs):
         api.apiKey = apiKey
         if authToken: 
