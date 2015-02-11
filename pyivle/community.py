@@ -165,3 +165,7 @@ class Community():
     def community_get_all_comments(self, taskId, auth=True):
         params = {'TaskID': taskId}
         return api.call('Community_GetAllComments', params, auth) 
+
+    # Non-standard API method, replacement for Community.DownloadFile
+    def community_download_file(id, auth=True):
+        return api.download_file(id, 'community', auth)

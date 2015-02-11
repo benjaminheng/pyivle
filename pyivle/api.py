@@ -8,6 +8,7 @@ from collections import namedtuple
 apiKey = None
 authToken = None
 baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
+downloadUrl = 'https://ivle.nus.edu.sg/api/downloadfile.ashx'
 
 class InvalidAPIKeyException(Exception): pass
 class InvalidLoginException(Exception): pass
@@ -16,7 +17,7 @@ class UnauthenticatedException(Exception): pass
 
 # call the method specified. don't add auth params by default
 def call(method, params, auth=False, verb='get'):
-    params = process_params(params, auth=auth)
+    params = process_params(params, auth)
     if verb.lower() == 'post':
         url = baseUrl + method
         paramsEncoded = urllib.urlencode(params)
@@ -32,6 +33,14 @@ def call(method, params, auth=False, verb='get'):
     # Magic (http://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object)
     result = json.loads(jsonString, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
     return result
+
+# TODO: test
+# target can be either 'workbin' or 'community'
+def download_file(fileid, target, auth=True):
+    params = process_params({'ID': fileid, 'target': target}, auth)
+    url = '%s?%s' % (downloadUrl, urllib.urlencode(params))
+    res = urllib2.urlopen(url)
+    return res
 
 
 def get_auth_token(apiKey, userid, password):

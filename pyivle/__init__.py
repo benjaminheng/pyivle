@@ -31,3 +31,8 @@ class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum,
     # Allow user to call custom methods in case of changes to the LAPI
     def call(self, method, auth=True, verb='get', **kwargs):
         return api.call(method, kwargs, auth, verb)
+
+    # Custom API call for downloading files. Downloads from workbin
+    # by default.
+    def download_file(fileid, target='workbin', auth=True):
+        return api.download_file(id, target, auth)
