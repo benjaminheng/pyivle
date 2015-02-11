@@ -31,7 +31,7 @@ for mod in modules.Results:
     print mod.CourseCode
 ```
 
-By default, PyIVLE returns results as a NamedTuple for convenience. If you wish to have JSON objects represented as dicts instead:
+By default, PyIVLE returns results as a namedtuple for convenience. If you wish to have results represented as dicts instead:
 
 ```python
 p.set_results_type(False)
@@ -43,7 +43,7 @@ print me.Results[0]['Name'], me.Results[0]['UserID']
 
 ## API Key
 
-You will need to get an API key here: https://ivle.nus.edu.sg/LAPI/default.aspx?
+You will need to get an API key here: https://ivle.nus.edu.sg/LAPI/default.aspx
 
 ## Development Status
 
