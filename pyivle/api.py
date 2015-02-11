@@ -10,6 +10,8 @@ authToken = None
 baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
 downloadUrl = 'https://ivle.nus.edu.sg/api/downloadfile.ashx'
 
+useNamedTuple = True
+
 class InvalidAPIKeyException(Exception): pass
 class InvalidLoginException(Exception): pass
 class InvalidParametersException(Exception): pass
@@ -30,8 +32,13 @@ def call(method, params, auth=False, verb='get'):
     with open('jsondump.txt', 'w') as f:
         parsed = json.loads(jsonString)
         f.write(json.dumps(parsed, indent=4, sort_keys=True))
-    # Magic (http://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object)
-    result = json.loads(jsonString, object_hook=lambda d: namedtuple('X', d.keys())(*d.values()))
+
+    if useNamedTuple:
+        # Magic (http://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object)
+        result = json.loads(jsonString, object_hook=lambda d: namedtuple('Obj', d.keys())(*d.values()))
+    else:
+        result = json.loads(jsonString)
+
     return result
 
 # TODO: test
@@ -62,7 +69,7 @@ def get_auth_token(apiKey, userid, password):
     opener = urllib2.build_opener(urllib2.HTTPCookieProcessor(cj))
     userToken = opener.open(loginUrl, params).read()
 
-    if len(userToken) != 416:
+    if 'Login fail' in userToken or '</html>' in userToken:
         raise InvalidLoginException('Login credentials are not valid.')
 
     return userToken

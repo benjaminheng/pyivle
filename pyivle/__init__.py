@@ -34,5 +34,8 @@ class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum,
 
     # Custom API call for downloading files. Downloads from workbin
     # by default.
-    def download_file(fileid, target='workbin', auth=True):
+    def download_file(self, fileid, target='workbin', auth=True):
         return api.download_file(id, target, auth)
+
+    def set_results_type(self, useNamedTuple):
+        api.useNamedTuple = useNamedTuple
