@@ -34,7 +34,7 @@ for mod in modules.Results:
 By default, PyIVLE transforms JSON objects into namedtuples for convenience. If you wish to have JSON objects represented as dicts instead:
 
 ```python
-p.set_results_type(False)
+p.use_namedtuple(False)
 
 # Get your name and user ID
 me = p.profile_view()

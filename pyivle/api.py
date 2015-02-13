@@ -10,7 +10,7 @@ authToken = None
 baseUrl = 'https://ivle.nus.edu.sg/api/Lapi.svc/'
 downloadUrl = 'https://ivle.nus.edu.sg/api/downloadfile.ashx'
 
-useNamedTuple = True
+useNamedtuple = True
 
 class InvalidAPIKeyException(Exception): pass
 class InvalidLoginException(Exception): pass
@@ -28,12 +28,8 @@ def call(method, params, auth=False, verb='get'):
     else:
         url = '%s?%s' % (baseUrl + method, urllib.urlencode(params))
         jsonString = urllib2.urlopen(url).read()
-    # DEBUG TODO: remove
-    with open('jsondump.txt', 'w') as f:
-        parsed = json.loads(jsonString)
-        f.write(json.dumps(parsed, indent=4, sort_keys=True))
 
-    if useNamedTuple:
+    if useNamedtuple:
         # Magic (http://stackoverflow.com/questions/6578986/how-to-convert-json-data-into-a-python-object)
         result = json.loads(jsonString, object_hook=lambda d: namedtuple('Obj', d.keys())(*d.values()))
     else:

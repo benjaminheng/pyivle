@@ -37,5 +37,5 @@ class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum,
     def download_file(self, fileid, target='workbin', auth=True):
         return api.download_file(id, target, auth)
 
-    def set_results_type(self, useNamedTuple):
-        api.useNamedTuple = useNamedTuple
+    def use_namedtuple(self, useNamedtuple):
+        api.useNamedtuple = useNamedtuple
