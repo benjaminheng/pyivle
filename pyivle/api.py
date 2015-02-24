@@ -37,7 +37,6 @@ def call(method, params, auth=False, verb='get'):
 
     return result
 
-# TODO: test
 # target can be either 'workbin' or 'community'
 def download_file(fileid, target, auth=True):
     params = process_params({'ID': fileid, 'target': target}, auth)

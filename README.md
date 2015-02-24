@@ -29,6 +29,11 @@ print me.Results[0].Name, me.Results[0].UserID
 modules = p.modules()
 for mod in modules.Results:
     print mod.CourseCode
+
+# Downloading a file
+response = p.download_file(fileId)
+with open(fileName, 'wb') as f:
+    f.write(response.read())
 ```
 
 By default, PyIVLE transforms JSON objects into namedtuples for convenience. If you wish to have JSON objects represented as dicts instead:
