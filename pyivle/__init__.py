@@ -18,8 +18,9 @@ from ivle_news import IVLENews
 from timetable import Timetable
 from delta_datasets import DeltaDatasets
 from profile import Profile
+from lesson_plan import LessonPlan 
 
-class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Workbin, Gradebook, LibraryEReserves, MyOrganizer, Community, OpenWebcastLectures, StudentEvents, IVLENews, Timetable, DeltaDatasets, Profile):
+class Pyivle(Login, Module, Consultation, RostersAndGroups, Announcement, Forum, WebcastLectures, Poll, Workbin, Gradebook, LibraryEReserves, MyOrganizer, Community, OpenWebcastLectures, StudentEvents, IVLENews, Timetable, DeltaDatasets, Profile, LessonPlan):
     def __init__(self, apiKey, authToken=None, **kwargs):
         api.apiKey = apiKey
         if authToken: 
