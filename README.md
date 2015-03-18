@@ -1,6 +1,6 @@
 # PyIVLE - A Python IVLE API Wrapper
 
-PyIVLE, pronounced "*py-vee-el-ee*", is a Python package that provides access to the [NUS IVLE LAPI](https://wiki.nus.edu.sg/display/ivlelapi/IVLE+LAPI+Overview). 
+PyIVLE is a Python package that provides access to the [NUS IVLE LAPI](https://wiki.nus.edu.sg/display/ivlelapi/IVLE+LAPI+Overview). 
 
 PyIVLE implements all API methods, but is not 100% tested. If you encounter a problem, please submit an issue!
 
@@ -49,7 +49,3 @@ print me.Results[0]['Name'], me.Results[0]['UserID']
 ## API Key
 
 You will need to get an API key here: https://ivle.nus.edu.sg/LAPI/default.aspx
-
-## Development Status
-
-PyIVLE is currently not ready for production.

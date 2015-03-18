@@ -12,7 +12,6 @@ class RostersAndGroups():
         return api.call('Guest_Roster', params, auth)
 
     # Rosters_and_Groups.GroupsByUserAndModule
-    # TODO: test this
     def groups_by_user_and_module(self, courseId=None, acadYear=None, semester=None, auth=True):
         if courseId is None and (None in [acadYear, semester]):
             raise api.InvalidParametersException('If courseId is empty, then acadYear and semester cannot be empty.')
@@ -35,9 +34,8 @@ class RostersAndGroups():
         return api.call('Module_ClassGroupUsers', params, auth)
 
     # Rosters_and_Groups.Module_OfficialGroupUsers
-    # TODO: test this
     def module_official_group_users(self, courseId=None, moduleCode=None, groupName=None, acadYear=None, semester=None, groupType=None, auth=True):
-        if courseId and (not groupName or not groupType):
+        if courseId and (None in [groupName, groupType]):
             raise api.InvalidParametersException('If courseId is given, then groupName and groupType cannot be empty.')
         elif courseId is None and (None in [moduleCode, groupName, acadYear, semester, groupType]):
             raise api.InvalidParametersException('If courseId is empty, then moduleCode, groupName, acadYear, semester, and groupType cannot be empty.')

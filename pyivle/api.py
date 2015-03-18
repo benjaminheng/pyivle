@@ -54,10 +54,10 @@ def get_auth_token(apiKey, userid, password):
 
     viewstate = re.search('__VIEWSTATE.+?value="(.+?)"', data)
     if not viewstate:
-        print '[Error] Unable to get user token.'
-        # TODO: try a hardcoded VIEWSTATE value. if fail again, raise exception
-
-    viewstate = viewstate.group(1)
+        # try setting viewstate to a hardcoded value if we fail trying to parse it
+        viewstate = '/wEPDwULLTEzODMyMDQxNjEPFgIeE1ZhbGlkYXRlUmVxdWVzdE1vZGUCARYCAgEPZBYEAgEPD2QWAh4Gb25ibHVyBQ91c2VySWRUb1VwcGVyKClkAgkPD2QWBB4Lb25tb3VzZW92ZXIFNWRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdsb2dpbmltZzEnKS5zcmM9b2ZmaW1nLnNyYzE7Hgpvbm1vdXNlb3V0BTRkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnbG9naW5pbWcxJykuc3JjPW9uaW1nLnNyYzE7ZBgBBR5fX0NvbnRyb2xzUmVxdWlyZVBvc3RCYWNrS2V5X18WAQUJbG9naW5pbWcxYTg4Q/LO3lNCB13iJpTeINmF1JQmGv61ni1TVgDIOII='
+    else:
+        viewstate = viewstate.group(1)
     params = urllib.urlencode({'__VIEWSTATE': viewstate, 'userid': userid, 'password': password})
 
     cj = CookieJar()
