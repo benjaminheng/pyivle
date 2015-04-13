@@ -49,3 +49,7 @@ print me.Results[0]['Name'], me.Results[0]['UserID']
 ## API Key
 
 You will need to get an API key here: https://ivle.nus.edu.sg/LAPI/default.aspx
+
+## License
+
+This project is licensed under the terms of the MIT license.
